@@ -1,8 +1,0 @@
-#!/bin/bash
-
-###
-## dirPlay :: OSX utility plays all WAVs in a directory, for previewing
-
-IFS=$'\t\n'
-for file in *wav *WAV; do { afplay ${file}; }; done
-IFS=$' \t\n'

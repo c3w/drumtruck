@@ -1,0 +1,33 @@
+#!/bin/bash
+
+###
+## truck :: OSX utility to play, and optionally save WAVs to a new dir
+##
+## USAGE: truck [SAVE DIR]
+
+if [ "${1}" ]; then {
+	echo "Catalog Enabled.  Press [y/Y]es or [n/N]o to save sample into ${1}/"
+	KEEPDIR="${1}"
+	mkdir -p "${KEEPDIR}"
+}; fi
+
+IFS=$'\t\n'
+for file in *wav *WAV; do {
+	echo -n "[PLAY] ${file} "
+if [ ! "${KEEPDIR}" ]; then {
+	afplay ${file}
+} else {
+	afplay ${file}&
+	echo -n "KEEP? "	
+	read -n 1 KEY
+	case $KEY in
+		n|N)
+		;;
+		y|Y)
+		  cp "${file}" "${KEEPDIR}" && echo -n "[SAVED] "
+		  ;;
+	esac
+	echo
+}; fi
+}; done
+IFS=$' \t\n'
