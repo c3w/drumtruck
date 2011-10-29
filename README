@@ -1,0 +1,18 @@
+drumtruck v.01
+c3w@juicypop.net
+
+drumTruck is a set of bash helpers to prep and deploy drumkits for nanostudio.  It can be adapted for other means as well
+
+Utilities ::
+	. dirplay - uses OSX 'afplay' to quickly preview an entire directory of WAVs
+	. nanopads - builds nanostudio kits from a large WAV directory
+		Usage: nanopads [kitname]  (e.g. nanopads korg_)
+			. strips spaces from filenames
+			. resamples anything that ffmpeg recognizes, to a 44.1k WAV
+			. splits out to multiple packages, based on MAX_PADS (nanostudio supports 16 pads per kit)
+			. builds a nanostudio Package.trg file
+			. moves the kit to the build/ directory, to use with nanosync (win/osx utility to copy files to the nanostudio iphone app)
+
+Enjoy!
+
+--c3w

@@ -1,0 +1,67 @@
+#!/bin/bash
+
+###
+## nanoPADS :: preps samples for nanostudio for iPhone
+## -> removes spaces from filenames
+## -> resamples to 44.1k WAV
+## -> builds individual TRGs with 16 pads per kit
+
+## REQUIRES: ffmpeg
+
+
+###
+## GLOBALS
+##
+MAX_PADS="16" ## nanostudio max pads per kit
+
+function noSpaces {
+IFS=$'\t\n'
+for file in *; do { mv "${file}" $(echo "${file}"|sed -e "s/ //g"); }; done
+IFS=$' \t\n'
+}
+
+function reSample() {
+if [ ! ${1} ]; then { echo "usage: (function)reSample [TARGET DIRECTORY]"; exit 1; }; fi
+DIR="${1}"
+
+if [ ! -d "${DIR}" ]; then { mkdir -p "${DIR}"; }; fi
+for file in *; do { ffmpeg -i "${file}" -ar 44100 "${DIR}/${file}.wav"; }; done
+}
+
+function nanoTRG() {
+if [ ! ${1} ]; then { echo "usage: (function)nanoTRG [CATALOG FILE]"; exit 1; }; fi
+CATALOG_FILE="${1}"
+KIT_NAME="${CATALOG_FILE}.trg"
+PAD=0
+
+mkdir "${KIT_NAME}"
+cat > "${KIT_NAME}/Package.trg" << __EOF__
+<Root FileVersion="1.000000" Mute="0">
+__EOF__
+
+for file in $(cat "${CATALOG_FILE}"); do {
+cat >> ${KIT_NAME}/Package.trg << __EOF__
+<Pad${PAD} Nam="${file}"></Pad${PAD}>
+__EOF__
+PAD=$[${PAD}+1];
+mv "${TMP_DIRECTORY}/${file}" "${KIT_NAME}"
+}; done
+cat >> ${KIT_NAME}/Package.trg << __EOF__
+</Root>
+__EOF__
+
+}
+###
+## START HERE
+if [ ! "${1}" ]; then { echo "Usage: nanopads [KIT_PREFIX]"; exit 1; }; fi
+TMP_DIRECTORY="build.tmp"; if [ ! -d "${TMP_DIRECTORY}" ]; then { mkdir -p "${TMP_DIRECTORY}" || exit 1; }; fi
+TARGET_DIRECTORY="build"; if [ ! -d "${TARGET_DIRECTORY}" ]; then { mkdir -p "${TARGET_DIRECTORY}" || exit 1; }; fi
+KIT_PREFIX="${1}"
+
+noSpaces
+reSample "${TMP_DIRECTORY}"
+ls "${TMP_DIRECTORY}"/*wav | sed -e "s/${TMP_DIRECTORY}\///" | split -l "${MAX_PADS}" -a 3 - "${KIT_PREFIX}"
+for catalog in "${KIT_PREFIX}"???; do {
+	nanoTRG "${catalog}"
+	mv "${catalog}.trg" "${TARGET_DIRECTORY}"
+}; done
