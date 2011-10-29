@@ -2,6 +2,7 @@
 
 ###
 ## nanoPADS :: preps samples for nanostudio for iPhone
+## http://github.com/c3w/drumtruck
 ## -> removes spaces from filenames
 ## -> resamples to 44.1k WAV
 ## -> builds individual TRGs with 16 pads per kit

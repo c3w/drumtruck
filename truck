@@ -2,6 +2,7 @@
 
 ###
 ## truck :: OSX utility to play, and optionally save WAVs to a new dir
+## http://github.com/c3w/drumtruck
 ##
 ## USAGE: truck [SAVE DIR]
 
