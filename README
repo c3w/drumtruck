@@ -10,8 +10,8 @@ Utilities ::
 			. strips spaces from filenames
 			. resamples anything that ffmpeg recognizes, to a 44.1k WAV
 			. splits out to multiple packages, based on MAX_PADS (nanostudio supports 16 pads per kit)
-			. builds a nanostudio Package.trg file
-			. moves the kit to the build/ directory, to use with nanosync (win/osx utility to copy files to the nanostudio iphone app)
+			. builds nanostudio Package.trg files
+			. moves kits to the build/ directory, to use with nanosync (win/osx utility to copy files to the nanostudio iphone app)
 
 Enjoy!
 
