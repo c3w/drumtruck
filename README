@@ -1,21 +1,21 @@
-drumtruck v.01
-c3w@juicypop.net
+2011OCT29
+http://github.com/c3w/drumtruck
 
-drumTruck is a set of bash helpers to prep and deploy drumkits for nanostudio.  It can be adapted for other means as well
+drumTruck v.01
 
-Utilities ::
-	. truck - uses OSX 'afplay' to quickly preview an entire directory of WAVs
-		- additionally, when 
-		Usage: truck [save dir] (e.g. truck basshits)
-			. prompts to save each sample, while it plays it via afplay in the background (for fast previews)
-	. nanopads - builds nanostudio kits from a large WAV directory
-		Usage: nanopads [kitname]  (e.g. nanopads korg_)
-			. strips spaces from filenames
-			. resamples anything that ffmpeg recognizes, to a 44.1k WAV
-			. splits out to multiple packages, based on MAX_PADS (nanostudio supports 16 pads per kit)
-			. builds nanostudio Package.trg files
-			. moves kits to the build/ directory, to use with nanosync (win/osx utility to copy files to the nanostudio iphone app)
+Got thousands of WAVs and want to package them for nanostudio?
 
-Enjoy!
+drumTruck is a set of BASH helpers to prepare and deploy TRGs for NanoStudio.
 
---c3w
+`truck` :: preview and save selected samples to a directory
+usage: truck [target dircectory] (e.g. truck funked)
+-> each sample is hit (background playing) and you hit YES or NO to keep or skip
+
+`nanopads` :: build (multiple) nanostudio TRGs
+usage: nanopads [kitname] (e.g. nanopads korg_x5_)
+-> strips spaces from filenames
+-> resamples anything that ffmpeg recognizes, to a 44.1k WAV
+-> splits out to multiple TRGs, based on MAX_PADS (default 16)
+-> build nanostudio Package.trg files
+-> moves kits to the build/ directory, to use with nanosync
+
