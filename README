@@ -4,7 +4,10 @@ c3w@juicypop.net
 drumTruck is a set of bash helpers to prep and deploy drumkits for nanostudio.  It can be adapted for other means as well
 
 Utilities ::
-	. dirplay - uses OSX 'afplay' to quickly preview an entire directory of WAVs
+	. truck - uses OSX 'afplay' to quickly preview an entire directory of WAVs
+		- additionally, when 
+		Usage: truck [save dir] (e.g. truck basshits)
+			. prompts to save each sample, while it plays it via afplay in the background (for fast previews)
 	. nanopads - builds nanostudio kits from a large WAV directory
 		Usage: nanopads [kitname]  (e.g. nanopads korg_)
 			. strips spaces from filenames
