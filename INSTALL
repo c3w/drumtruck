@@ -1,0 +1,17 @@
+###
+## drumTruck INSTALLATION
+##
+
+ffmpeg
+	. http://ffmpegx.com/download.html
+	. `nanopads` requires ffmpeg to convert all audio files in a directory to 44.1khz WAVs
+
+afplay
+	. `truck` uses OSX-native `afplay` to play directories of files
+
+install.sh
+	. launch Terminal and run ./install.sh
+	. relaunch Terminal for your new PATH (~/.bash_profile) to take effect
+
+Enjoy!
+-c3w
